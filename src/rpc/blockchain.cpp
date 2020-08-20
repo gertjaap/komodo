@@ -135,15 +135,15 @@ UniValue blockheaderToJSON(const CBlockIndex* blockindex)
         return(result);
     }
     uint256 notarized_hash,notarized_desttxid; int32_t prevMoMheight,notarized_height;
-    notarized_height = komodo_notarized_height(&prevMoMheight,&notarized_hash,&notarized_desttxid);
-    result.push_back(Pair("last_notarized_height", notarized_height));
+    //notarized_height = komodo_notarized_height(&prevMoMheight,&notarized_hash,&notarized_desttxid);
+    //result.push_back(Pair("last_notarized_height", notarized_height));
     result.push_back(Pair("hash", blockindex->GetBlockHash().GetHex()));
     int confirmations = -1;
     // Only report confirmations if the block is on the main chain
     if (chainActive.Contains(blockindex))
         confirmations = chainActive.Height() - blockindex->GetHeight() + 1;
-    result.push_back(Pair("confirmations", komodo_dpowconfs(blockindex->GetHeight(),confirmations)));
-    result.push_back(Pair("rawconfirmations", confirmations));
+    //result.push_back(Pair("confirmations", komodo_dpowconfs(blockindex->GetHeight(),confirmations)));
+    result.push_back(Pair("confirmations", confirmations));
     result.push_back(Pair("height", blockindex->GetHeight()));
     result.push_back(Pair("version", blockindex->nVersion));
     result.push_back(Pair("merkleroot", blockindex->hashMerkleRoot.GetHex()));
@@ -154,7 +154,7 @@ UniValue blockheaderToJSON(const CBlockIndex* blockindex)
     result.push_back(Pair("bits", strprintf("%08x", blockindex->nBits)));
     result.push_back(Pair("difficulty", GetDifficulty(blockindex)));
     result.push_back(Pair("chainwork", blockindex->chainPower.chainWork.GetHex()));
-    result.push_back(Pair("segid", (int)komodo_segid(0,blockindex->GetHeight())));
+    //result.push_back(Pair("segid", (int)komodo_segid(0,blockindex->GetHeight())));
 
     if (blockindex->pprev)
         result.push_back(Pair("previousblockhash", blockindex->pprev->GetBlockHash().GetHex()));
